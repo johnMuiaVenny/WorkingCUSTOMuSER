@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'COMMENTSaPP.apps.CommentsappConfig',
+    'ACCOUNTS.apps.AccountsConfig',
+    'ACCOUNTS2.apps.Accounts2Config',
 ]
 
 MIDDLEWARE = [

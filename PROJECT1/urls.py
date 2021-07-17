@@ -20,7 +20,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('COMMENTSaPP.urls')),
+    path('', include('ACCOUNTS.urls')),
+    path('ACCOUNTS2/', include('ACCOUNTS2.urls')),
 ]
 
 if settings.DEBUG:

@@ -9,4 +9,5 @@ urlpatterns = [
     path('Login', Login, name = 'Login'),
     path('Logout', Logout, name = 'Logout'),
     path('Home', Home, name = 'Home'),
+    path('About', About, name = 'About'),
 ]

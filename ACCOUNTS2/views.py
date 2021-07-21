@@ -8,9 +8,13 @@ from .forms import MyForm
 
 # Create your views here.
 
-@login_required(login_url='/ACCOUNTS2/')
+@login_required(login_url='/ACCOUNTS2/Login')
 def Home(request):
     return render(request, 'ACCOUNTS2/Home.html')
+
+@login_required(login_url='/ACCOUNTS2/Login')
+def About(request):
+    return render(request, 'ACCOUNTS2/About.html')
 
 
 
@@ -30,11 +34,14 @@ def Register(request):
 
 def Login(request):
     if request.method == 'POST':
+        next = request.GET.get('next') #Go to the Intended page.
         Username = request.POST['username']
         Pass1 = request.POST['password1']
         user = auth.authenticate(username=Username, password=Pass1)
         if user is not None:
             auth.login(request, user)
+            if next:
+                return redirect(next)
             return redirect('/ACCOUNTS2/Home')
         else:
             messages.error(request, 'Invalid Credentials!!')

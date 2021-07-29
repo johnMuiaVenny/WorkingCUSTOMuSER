@@ -5,34 +5,46 @@ from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from .forms import MyForm
+from .decorators import unauthenticated_user, allowed_users, admin_only
+from django.contrib.auth.models import Group
 
 # Create your views here.
 
 @login_required(login_url='/ACCOUNTS2/Login')
+@admin_only
 def Home(request):
     return render(request, 'ACCOUNTS2/Home.html')
 
+
+
 @login_required(login_url='/ACCOUNTS2/Login')
+@allowed_users(allowed_roles=['admin', 'etc'])
 def About(request):
     return render(request, 'ACCOUNTS2/About.html')
 
 
 
+@unauthenticated_user
 def Register(request):
     form = MyForm()
     if request.method == 'POST':
         form = MyForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, user + ' registered Successifully.' )
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            group = Group.objects.get(name = 'customer')
+            user.groups.add(group)
+            messages.success(request, username + ' registered Successifully.' )
             return redirect('/ACCOUNTS2/Login')
     return render(request, 'ACCOUNTS2/Register.html', {'form':form})
 
 
 
-
+@unauthenticated_user
 def Login(request):
+    # if request.user.is_authenticated:
+    #     return redirect('/ACCOUNTS2/Home')
+    # else:
     if request.method == 'POST':
         next = request.GET.get('next') #Go to the Intended page.
         Username = request.POST['username']
@@ -49,6 +61,15 @@ def Login(request):
     return render(request, 'ACCOUNTS2/Login.html')
 
 
+
 def Logout(request):
     auth.logout(request)
     return HttpResponse('LOGED OUT.')
+
+
+
+#More knowledge on Decorators.
+
+#@allowed_users(allowed_roles=['admin', 'etc'])
+def UserPage(request):
+    return render(request, 'ACCOUNTS2/UserPage.html')

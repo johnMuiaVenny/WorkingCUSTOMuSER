@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User, auth
 
 # Create your views here.
+def Home(request):
+    return HttpResponse("JOHN MUIA")
 
 def Register(request):
     if request.method == 'POST':

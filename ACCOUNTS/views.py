@@ -36,7 +36,7 @@ def Register(request):
         else:
             messages.error(request, 'Password must be between 8-16 characters long!!')
             return redirect('/')
-    return render(request, 'ACCOUNTS/Register.html')
+    return render(request, 'Register.html')
 
 #ppppppppppppppppppppppppppppppppppppppppppppppppppppppp
 

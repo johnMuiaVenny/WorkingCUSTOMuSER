@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, auth
 
 # Create your views here.
 def Home(request):
-    return HttpResponse("JOHN MUIA")
+    return HttpResponse("JOHN MUIA<br>MAGGY IS A FORTH YEAR STUDENT.")
 
 def Register(request):
     if request.method == 'POST':

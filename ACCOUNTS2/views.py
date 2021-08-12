@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
-from .forms import MyForm
-from .decorators import unauthenticated_user, allowed_users, admin_only
+from .forms import MyForm, DropForm
+from .decorators import *
 from django.contrib.auth.models import Group
 
 # Create your views here.
@@ -69,7 +69,10 @@ def Logout(request):
 
 
 #More knowledge on Decorators.
-
 #@allowed_users(allowed_roles=['admin', 'etc'])
+@Test(lists=['johnmuia'])
 def UserPage(request):
-    return render(request, 'ACCOUNTS2/UserPage.html')
+    formf = DropForm()
+    return render(request, 'ACCOUNTS2/UserPage.html', {'formf':formf})
+
+

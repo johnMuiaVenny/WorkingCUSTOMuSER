@@ -41,4 +41,14 @@ def admin_only(view_func):
 
     return wrapper_func 
 
+
+def Test(lists=[]):
+    def muia(view_func):
+        def working_func(request, *args, **kwargs):
+            if lists[0] == 'johnmuia':
+                return view_func(request, *args, **kwargs)
+            else:
+                return HttpResponse("CONDITION FAILED.")
+        return working_func
+    return muia
         

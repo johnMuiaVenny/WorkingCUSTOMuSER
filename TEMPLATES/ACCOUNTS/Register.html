@@ -9,6 +9,7 @@
 <form action="" method="POST">
     {% csrf_token %}
 
+    <input type="hidden" name="UserType" value="{{UserType}}"/>
     <input type="text" placeholder="FIRST NAME" name="fname" required/><br>
     <input type="text" placeholder="LAST NAME" name="lname" required/><br>
     <input type="text" placeholder="USERNAME" name="username" required/><br>

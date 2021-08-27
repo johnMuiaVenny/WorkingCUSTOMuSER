@@ -1,0 +1,16 @@
+
+
+<form action="{% url 'USERMODEL:Register' %}" method="GET">
+
+    <label for='STUDENT'>STUDENT</label>
+    <input required type="radio" name="UserType" id='STUDENT' value="student"/><br>
+
+    <label for='TEACHER'>TEACHER</label>
+    <input required type="radio" name="UserType" id='TEACHER' value="teacher"/><br>
+
+    <label for='PARENT'>PARENT</label>
+    <input required type="radio" name="UserType" id='PARENT' value="parent"/><br><br>
+
+    <input type="submit" value="Next"/>
+
+</form>

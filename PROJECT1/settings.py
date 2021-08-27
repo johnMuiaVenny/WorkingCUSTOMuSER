@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ACCOUNTS.apps.AccountsConfig',
-    'ACCOUNTS2.apps.Accounts2Config',
+    'USERMODEL.apps.UsermodelConfig',
 ]
 
 MIDDLEWARE = [
@@ -141,6 +140,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+AUTH_USER_MODEL = 'USERMODEL.NEWUSER'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())

@@ -5,15 +5,15 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 # Create your models here.
 
 class CUSTOMACCOUNTMANAGER(BaseUserManager):
-    def create_user(self, email, username, first_name, last_name, user_type, password=None, **other_fields):
+    def create_user(self, email, username, first_name, last_name, password=None, **other_fields):
 
         email = self.normalize_email(email)
-        user = self.model(email=email, username=username, last_name=last_name, first_name=first_name, user_type=user_type, **other_fields)
+        user = self.model(email=email, username=username, last_name=last_name, first_name=first_name, **other_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, user_type, first_name, last_name, password, **other_fields):
+    def create_superuser(self, email, username, first_name, last_name, password, **other_fields):
 
         other_fields.setdefault('is_staff', True)
         other_fields.setdefault('is_superuser', True)
@@ -24,7 +24,7 @@ class CUSTOMACCOUNTMANAGER(BaseUserManager):
         if other_fields.get('is_superuser') is not True:
             raise ValueError("is_superuser=True for SuperUser!")
 
-        return self.create_user(email, username, user_type, first_name, last_name, password, **other_fields)
+        return self.create_user(email, username, first_name, last_name, password, **other_fields)
 
 
 
@@ -44,7 +44,7 @@ class NEWUSER(AbstractBaseUser, PermissionsMixin):
     objects = CUSTOMACCOUNTMANAGER()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'user_type']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     def __str__(self):
         return self.username
@@ -72,8 +72,17 @@ class MYUSER(models.Model):
 class TEACHER(MYUSER):
     Role_No = models.CharField(max_length=200, null=True, blank=True)
 
+    def __str__(self):
+        return self.fName
+
 class STUDENT(MYUSER):
     Reg_No = models.CharField(max_length=200, null=True, blank=True)
 
+    def __str__(self):
+        return self.fName
+
 class PARENT(MYUSER):
     Phone = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.fName
